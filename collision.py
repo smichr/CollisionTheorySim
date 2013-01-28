@@ -69,15 +69,30 @@ screen = pygame.display.set_mode([screen_width,screen_height])
 font = pygame.font.Font(None, 25)
 SMLB = font.render("More Sugar", True, black)
 SMLS = font.render("Less Sugar", True, black)
-CCL = font.render("Number of collisions:", True, black)
+CCL = font.render("Number of sugar collisions:", True, black)
 
 # Keeps the sprites make organized in lists
+sugar_list = pygame.sprite.RenderPlain()	# For tracking sugar
 all_list = pygame.sprite.RenderPlain()		# For moving sprites
 control_list = pygame.sprite.RenderPlain()	# For controls
 
+# Checks for any collisions between sugar or anything else
+def check_collision():
+    global num_collision
+
+    a = pygame.sprite.groupcollide(sugar_list, all_list, False, False, None)
+    b = pygame.sprite.truth(a)
+
+    if b == True:
+        num_collision += 1
+    else:
+        pass
+
+# Resets the sprites after the user has changed the sugar settings
 def reset():
     
     global all_list
+    global sugar_list
     global num_collision
 
     # Resets the number of collision counter
@@ -86,6 +101,8 @@ def reset():
     # Clears all list so that new sprites can be made
     for item in all_list:
         all_list.remove(item)
+    for item in sugar_list:
+        sugar_list.remove(item)
  
     # Will create the sprites for all the ingredients but the sugar
     # Sprites for KNO
@@ -117,8 +134,8 @@ def reset():
         sugar_sprite = fuel(sugar, 10, 10)
         sugar_sprite.rect.x = random.randrange(100, 600)
         sugar_sprite.rect.y = random.randrange(50, 600)
-        #sugar_list.add(sugar_sprite)
-        all_list.add(sugar_sprite)
+        sugar_list.add(sugar_sprite)
+        #all_list.add(sugar_sprite)
 
 # Sprite that will show the [sugar] in the fuel
 sugar_key = fuel(black, 25, 20)
@@ -138,9 +155,10 @@ reset()
 
 # Main program loop
 while done == True:    
-    num_collision += 1
     num_collision_string = str(num_collision)  
-    
+
+    check_collision() 
+
     # Speed of particles
     y_change = 1
     x_change = 1 
@@ -155,8 +173,8 @@ while done == True:
                 pygame.draw.line(screen, fire, [100,50], [100, 600], 5)
                 pygame.draw.line(screen, fire, [600,50], [600, 600], 5) 
                 pygame.draw.line(screen, fire, [100,600], [600, 600], 5)  
-                y_change = 3
-                x_change = 3
+                y_change = 10
+                x_change = 10
             if event.key == pygame.K_UP:
                 if sugar_key.rect.y > 130:
                     sugar_key.rect.y -= 16
@@ -180,17 +198,19 @@ while done == True:
 
     control_list.draw(screen)	# Draws the [sugar] monitor to the screen
     all_list.draw(screen)	# Draws all the sprites to the screen
+    sugar_list.draw(screen)
     clock.tick(60)		# 20 fps
     pygame.display.flip()	# Updates the screen
     screen.fill(white)
     all_list.update()
+    sugar_list.update()
     
     CC = font.render(num_collision_string, True, black)
     # The [sugar] and collision monitors 
     screen.blit(SMLB, [0, 90])
     screen.blit(SMLS, [0, 395])
     screen.blit(CCL, [0, 650])
-    screen.blit(CC, [200, 650])
+    screen.blit(CC, [250, 650])
     pygame.draw.line(screen, black, [25, 122], [50, 122], 5)
     pygame.draw.line(screen, black, [25, 370], [50, 370], 5)
     pygame.draw.line(screen, black, [25, 122], [25, 370])
