@@ -110,7 +110,6 @@ def reset():
         kno_sprite = fuel(kno, 10, 10)
         kno_sprite.rect.x = random.randrange(100, 600)
         kno_sprite.rect.y = random.randrange(50, 600)
-        #kno_list.add(kno_sprite)
         all_list.add(kno_sprite)
 
     # Sprites for corn syrup
@@ -118,7 +117,6 @@ def reset():
         corn_sprite = fuel(corn, 10, 10)
         corn_sprite.rect.x = random.randrange(100, 600)
         corn_sprite.rect.y = random.randrange(50, 600)
-        #corn_list.add(corn_sprite)
         all_list.add(corn_sprite)
 
     # Sprites for water
@@ -126,7 +124,6 @@ def reset():
         water_sprite = fuel(water, 10, 10)
         water_sprite.rect.x = random.randrange(100, 600)
         water_sprite.rect.y = random.randrange(50, 600)
-        #water_list.add(water_sprite)
         all_list.add(water_sprite)
 
     # Sprites for sugar
@@ -135,7 +132,6 @@ def reset():
         sugar_sprite.rect.x = random.randrange(100, 600)
         sugar_sprite.rect.y = random.randrange(50, 600)
         sugar_list.add(sugar_sprite)
-        #all_list.add(sugar_sprite)
 
 # Sprite that will show the [sugar] in the fuel
 sugar_key = fuel(black, 25, 20)
@@ -149,12 +145,12 @@ clock = pygame.time.Clock()
 # Key repeating
 pygame.key.set_repeat(100,5)
 
-done = True
+done = False
 
 reset()
 
 # Main program loop
-while done == True:    
+while done == False:    
     num_collision_string = str(num_collision)  
 
     check_collision() 
@@ -164,9 +160,11 @@ while done == True:
     x_change = 1 
 
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
-                done = False  
+                done = True  
             if event.key == pygame.K_f:
             # Defines a box with dimensions 100-600 (x), 50-600 (y) after flame
                 pygame.draw.line(screen, fire, [100,50], [600, 50], 5)  

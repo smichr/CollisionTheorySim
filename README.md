@@ -15,7 +15,14 @@ The sugar is in pink
 The corn syrup is in yellow
 The water is in blue
 
+
+CONTROLS
+
+Use the up and down arrow keys to increase or decrease the amount of sugar.  Hold down "f" on your keyboard to increase the speed of the particles.  Press "q" on your keyboard to exit the program.  
+
+
 Interesting sites to learn about collision theory and rates of reactions:
+
 http://www.chemguide.co.uk/physical/basicrates/introduction.html
 http://www.chm.davidson.edu/vce/kinetics/RateOfReaction.html
 http://chemistry.about.com/od/stoichiometry/a/reactionrate.htm
