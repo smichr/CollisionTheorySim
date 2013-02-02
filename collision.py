@@ -81,9 +81,8 @@ def check_collision():
     global num_collision
 
     a = pygame.sprite.groupcollide(sugar_list, all_list, False, False, None)
-    b = pygame.sprite.truth(a)
 
-    if b == True:
+    if a != {}:
         num_collision += 1
     else:
         pass
@@ -220,7 +219,6 @@ while done == False:
     pygame.draw.line(screen, black, [600,50], [600, 600], 5) 
     pygame.draw.line(screen, black, [100,600], [600, 600], 5)  
 
- 
 
 pygame.quit()	# Ends the sim
 
