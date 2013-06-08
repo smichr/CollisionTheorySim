@@ -1,6 +1,6 @@
 README
 
-This is a (sort of) collision theroy simulations made to illustrate the point of what happens when you change the concentration of sugar in model rocket fuel.
+This is a (sort of) collision theory simulations made to illustrate the point of what happens when you change the concentration of sugar in model rocket fuel.
 
 I say that it is a sort of collision theory simulation because it does not acutally show the behaviour of particles on the molecular level.  However, the program is sucessful in illustrating the effects of changing the concentration of one variable (and it's effects on the other variable).
 
